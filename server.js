@@ -34,7 +34,7 @@ app.use('/groups', groupsRouter)
 app.use('/users', usersRouter)
 
 // Listen for connections
-app.listen(9000, (req, res) => {
+app.listen(process.env.PORT, (req, res) => {
   console.log(`Logistix API is listening on host at port 9000`)
 })
 
