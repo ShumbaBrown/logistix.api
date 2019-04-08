@@ -36,3 +36,5 @@ app.use('/users', usersRouter)
 app.listen(process.env.PORT, (req, res) => {
   console.log(`Logistix API is listening on host at port ${process.env.PORT}`)
 })
+
+module.exports = app
