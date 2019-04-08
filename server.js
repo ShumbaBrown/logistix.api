@@ -9,7 +9,8 @@ var mongoose = require('mongoose')
 var app = express()
 
 // Connect to DB
-mongoose.connect(process.env.MONGO_DB, { useNewUrlParser: true })
+mongoUrl = 'mongodb+srv://kode:admin@logistix-0ws1z.gcp.mongodb.net/test?retryWrites=true'
+mongoose.connect(mongoUrl, { useNewUrlParser: true })
 var db = mongoose.connection
 db.on('error', console.error.bind(console, 'Connection error.'))
 db.once('open', () => console.log('Successfully connected to database.'))
@@ -33,8 +34,8 @@ app.use('/groups', groupsRouter)
 app.use('/users', usersRouter)
 
 // Listen for connections
-app.listen(process.env.PORT, (req, res) => {
-  console.log(`Logistix API is listening on host at port ${process.env.PORT}`)
+app.listen(process.env.PORT || 9000, (req, res) => {
+  console.log(`Logistix API is listening on host at port ${process.env.PORT || 9000}`)
 })
 
 module.exports = app
