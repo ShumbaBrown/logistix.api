@@ -5,19 +5,19 @@ var Bill = require('../models/bill')
 module.exports.fetchAll = (req, res) => {
   Bill.find({}, (err, result) => {
     if (err || result.length === 0) {
-      res.status(400).json({
+      return res.status(400).json({
         success: false,
         message: 'Error'
       })
     }
     if (result) {
       console.log('Get request for bills')
-      res.status(200).json({
+      return res.status(200).json({
         success: true,
         message: 'Bills fetched successfully',
         data: result
       })
-    } else res.status(400).json({
+    } else return res.status(400).json({
       success: false,
       message: 'None'
     })
@@ -27,18 +27,18 @@ module.exports.fetchAll = (req, res) => {
 module.exports.fetchOne = (req, res) => {
   Bill.findOne({ billId: req.params.id }, (err, result) => {
     if (err || result.length === 0) {
-      res.status(400).json({
+      return res.status(400).json({
         success: false,
         message: 'Error'
       })
     }
     if (result) {
-      res.status(200).json({
+      return res.status(200).json({
         success: true,
         message: 'Bill fetched successfully',
         data: result
       })
-    } else res.status(400).json({
+    } else return res.status(400).json({
       success: false,
       message: 'None'
     })
@@ -54,12 +54,12 @@ module.exports.add = (req, res) => {
 
   newBill.save((err, bill) => {
     if (err) {
-      res.status(400).json({
+      return res.status(400).json({
         success: false,
         message: 'Error'
       })
     }
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: 'New bill created successfully',
       billId: bill.billId
@@ -74,12 +74,12 @@ module.exports.update = (req, res) => {
 
   Bill.updateOne({billId: req.params.id}, queryData, (err, bill) => {
     if (err) {
-      res.status(400).json({
+      return res.status(400).json({
         success: false,
         message: 'Error'
       })
     }
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: 'Bill updated successfully'
     })
@@ -89,12 +89,12 @@ module.exports.update = (req, res) => {
 module.exports.remove = (req, res) => {
   Bill.deleteOne({billId: req.params.id}, (err) => {
     if (err) {
-      res.status(400).json({
+      return res.status(400).json({
         success: false,
         message: 'Error'
       })
     }
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: 'Bill deleted successfully'
     })

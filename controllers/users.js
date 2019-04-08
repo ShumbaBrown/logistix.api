@@ -5,19 +5,19 @@ var User = require('../models/user')
 module.exports.fetchAll = (req, res) => {
   User.find({}, (err, result) => {
     if (err || result.length === 0) {
-      res.status(400).json({
+      return res.status(400).json({
         success: false,
         message: 'Error'
       })
     }
     if (result) {
       console.log('Get request for users')
-      res.status(200).json({
+      return res.status(200).json({
         success: true,
         message: 'Users fetched successfully',
         data: result
       })
-    } else res.status(400).json({
+    } else return res.status(400).json({
       success: false,
       message: 'None'
     })
@@ -27,18 +27,18 @@ module.exports.fetchAll = (req, res) => {
 module.exports.fetchOne = (req, res) => {
   User.findOne({ userId: req.params.id }, (err, result) => {
     if (err || result.length === 0) {
-      res.status(400).json({
+      return res.status(400).json({
         success: false,
         message: 'Error'
       })
     }
     if (result) {
-      res.status(200).json({
+      return res.status(200).json({
         success: true,
         message: 'User fetched successfully',
         data: result
       })
-    } else res.status(400).json({
+    } else return res.status(400).json({
       success: false,
       message: 'None'
     })
@@ -57,12 +57,12 @@ module.exports.add = (req, res) => {
 
   newUser.save((err, user) => {
     if (err) {
-      res.status(400).json({
+      return res.status(400).json({
         success: false,
         message: 'Error'
       })
     }
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: 'New group created successfully',
       userId: user.userId
@@ -76,13 +76,13 @@ module.exports.update = (req, res) => {
 
   User.updateOne({userId: req.params.id}, queryData, (err, user) => {
     if (err) {
-      res.status(400).json({
+      return res.status(400).json({
         success: false,
         message: 'Error'
       })
     }
     if (user.ok) {
-      res.status(200).json({ 
+      return res.status(200).json({ 
         success: true,
         message: 'User updated successfully'
       })
@@ -93,12 +93,12 @@ module.exports.update = (req, res) => {
 module.exports.remove = (req, res) => {
   User.deleteOne({userId: req.params.id}, (err) => {
     if (err) {
-      res.status(400).json({
+      return res.status(400).json({
         success: false,
         message: 'Error'
       })
     }
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: 'User deleted successfully'
     })

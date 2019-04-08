@@ -26,7 +26,7 @@ app.use(compression())
 app.use(helmet())
 
 // Default Route
-app.get('/', (req, res) => { res.status(200).send('Logistix API')})
+app.get('/', (req, res) => { return res.status(200).send('Logistix API')})
 
 // Assign Routes
 app.use('/bills', billsRouter)
