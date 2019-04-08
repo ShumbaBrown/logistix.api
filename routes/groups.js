@@ -5,7 +5,7 @@ var groupsController = require('../controllers/groups.js')
 router.get('/', groupsController.fetchAll)
 router.get('/:id', groupsController.fetchOne)
 router.post('/', groupsController.add)
-router.put('/:id', groupsController.update)
+router.post('/:id', groupsController.update)
 router.delete('/:id', groupsController.remove)
 
 module.exports = router
