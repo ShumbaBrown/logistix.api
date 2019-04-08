@@ -1,36 +1,106 @@
 var mongoose = require('mongoose')
+var crypto = require('crypto')
 var User = require('../models/user')
 
 module.exports.fetchAll = (req, res) => {
   User.find({}, (err, result) => {
-    if (err) throw (err)
+    if (err || result.length === 0) {
+      res.status(400).json({
+        success: false,
+        message: 'Error'
+      })
+    }
     if (result) {
       console.log('Get request for users')
-      res.status(200).json(result)
-    }
+      res.status(200).json({
+        success: true,
+        message: 'Users fetched successfully',
+        data: result
+      })
+    } else res.status(400).json({
+      success: false,
+      message: 'None'
+    })
   })
 }
 
 module.exports.fetchOne = (req, res) => {
-  res.status(200).json({
-    success: true
+  User.findOne({ userId: req.params.id }, (err, result) => {
+    if (err || result.length === 0) {
+      res.status(400).json({
+        success: false,
+        message: 'Error'
+      })
+    }
+    if (result) {
+      res.status(200).json({
+        success: true,
+        message: 'User fetched successfully',
+        data: result
+      })
+    } else res.status(400).json({
+      success: false,
+      message: 'None'
+    })
   })
 }
 
 module.exports.add = (req, res) => {
-  res.status(200).json({
-    success: true
+  var newUser = new User({
+    userId: crypto.randomBytes(4).toString('hex'),
+    username: req.params.id
+  })
+  // Fill in optionals
+  if (req.query.firstName) newUser.firstName = req.query.firstName
+  if (req.query.lastName) newUser.lastName = req.query.lastName
+
+
+  newUser.save((err, user) => {
+    if (err) {
+      res.status(400).json({
+        success: false,
+        message: 'Error'
+      })
+    }
+    res.status(200).json({
+      success: true,
+      message: 'New group created successfully',
+      userId: user.userId
+    })
   })
 }
 
 module.exports.update = (req, res) => {
-  res.status(200).json({
-    success: true
+  var queryData = {}
+  if (req.query.users) queryData.users = req.query.users
+
+  User.updateOne({userId: req.params.id}, queryData, (err, user) => {
+    if (err) {
+      res.status(400).json({
+        success: false,
+        message: 'Error'
+      })
+    }
+    if (user.ok) {
+      res.status(200).json({ 
+        success: true,
+        message: 'User updated successfully'
+      })
+    }
   })
 }
 
 module.exports.remove = (req, res) => {
-  res.status(200).json({
-    success: true
+  User.deleteOne({userId: req.params.id}, (err) => {
+    if (err) {
+      res.status(400).json({
+        success: false,
+        message: 'Error'
+      })
+    }
+    res.status(200).json({
+      success: true,
+      message: 'User deleted successfully'
+    })
   })
 }
