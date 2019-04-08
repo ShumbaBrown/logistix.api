@@ -64,7 +64,7 @@ module.exports.add = (req, res) => {
     }
     return res.status(200).json({
       success: true,
-      message: 'New group created successfully',
+      message: 'New user created successfully',
       userId: user.userId
     })
   })
