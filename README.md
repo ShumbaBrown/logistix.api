@@ -10,11 +10,11 @@
 Endpoint | Description | Working | Arguments 
 ---------- | ------------------------------ | ---------- |  ---------- 
 GET /bills | Returns all bills | Yes | None
-GET /bills/:id | Returns one specified bill | No | { billId: String }
+GET /bills/:id | Returns one specified bill | Yes | { billId: String }
 GET /users | Returns all users | Yes | None
-GET /users/:id | Returns one specified user | No | { userId: String }
+GET /users/:id | Returns one specified user | Yes | { userId: String }
 GET /groups | Returns all groups | Yes | None
-GET /groups/:id | Returns one specified group | No | { groupId: String }
+GET /groups/:id | Returns one specified group | Yes | { groupId: String }
 POST /bills | Creates a new bill | No | { groupId: String (Optional), users: Array (Optional) }
 POST /bills/:id | Updates a specified bill | No | { groupId: String (Optional), users: Array (Optional) }
 POST /users | Creates a new user | No | { firstName: String (Optional), lastName: String (Optional) }
