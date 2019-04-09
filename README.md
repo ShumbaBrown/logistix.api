@@ -7,20 +7,25 @@
 
 ## Endpoints
   
-Endpoint | Description | Working
----------- | ------------------------------ | ---------- 
-GET /bills | Returns all bills | Yes
-GET /bills/:id | Returns one specified bill | No
-GET /users | Returns all users | Yes
-GET /users/:id | Returns one specified user | No
-GET /groups | Returns all groups | Yes
-GET /groups/:id | Returns one specified group | No
-POST /bills | Creates a new bill | No
-POST /bills/:id | Updates a specified bill | No
-POST /users | Creates a new user | No
-POST /users/:id | Updates a specified user | No
-POST /groups | Creates a new group | No
-POST /groups/:id | Updates a specified group | No
-DELETE /users/:id | Deletes a specified user | No
-DELETE /groups/:id | Deletes a specified group | No
-DELETE /bills/:id | Deletes a specified bill | No
+Endpoint | Description | Working | Arguments 
+---------- | ------------------------------ | ---------- |  ---------- 
+GET /bills | Returns all bills | Yes | None
+GET /bills/:id | Returns one specified bill | No | { billId: String }
+GET /users | Returns all users | Yes | None
+GET /users/:id | Returns one specified user | No | { userId: String }
+GET /groups | Returns all groups | Yes | None
+GET /groups/:id | Returns one specified group | No | { groupId: String }
+POST /bills | Creates a new bill | No | { groupId: String (Optional), users: Array (Optional) }
+POST /bills/:id | Updates a specified bill | No | { groupId: String (Optional), users: Array (Optional) }
+POST /users | Creates a new user | No | { firstName: String (Optional), lastName: String (Optional) }
+POST /users/:id | Updates a specified user | No | { firstName: String (Optional), lastName: String (Optional), username: String (Optional) }
+POST /groups | Creates a new group | No | None
+POST /groups/:id | Updates a specified group | No | { users: Array (Optional) }
+DELETE /users/:id | Deletes a specified user | No | None
+DELETE /groups/:id | Deletes a specified group | No | None
+DELETE /bills/:id | Deletes a specified bill | No | None
+
+**To be added**
+- Add username to User controllers
+- Add groupName to Group model and controllers
+- Add billName to Bill model and controllers
