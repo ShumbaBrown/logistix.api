@@ -9,7 +9,6 @@
   
 Endpoint | Description | Working
 ---------- | ------------------------------ | ---------- 
-
 GET /bills | Returns all bills | Yes
 GET /bills/:id | Returns one specified bill | No
 GET /users | Returns all users | Yes
