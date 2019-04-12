@@ -29,3 +29,5 @@ DELETE /bills/:id | Deletes a specified bill | No | None
 - Add username to User controllers
 - Add groupName to Group model and controllers
 - Add billName to Bill model and controllers
+- Add bills array to group model
+- Add groups array to user model
