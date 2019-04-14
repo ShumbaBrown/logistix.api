@@ -48,8 +48,9 @@ module.exports.fetchOne = (req, res) => {
 module.exports.add = (req, res) => {
   var newBill = new Bill({
     billId: crypto.randomBytes(4).toString('hex'),
-    groupId: '',
-    users: []
+    groupId: req.query.groupId ? req.query.groupId : '',
+    users: req.query.users ? req.query.users : [],
+    billName: req.query.billName ? req.query.billName : `Bill ${this.billId}`
   })
 
   newBill.save((err, bill) => {
@@ -71,6 +72,7 @@ module.exports.update = (req, res) => {
   var queryData = {}
   if (req.query.groupId) queryData.groupId = req.query.groupId
   if (req.query.users) queryData.users = req.query.users
+  if (req.query.billName) queryData.billName = req.query.billName
 
   Bill.updateOne({billId: req.params.id}, queryData, (err, bill) => {
     if (err) {

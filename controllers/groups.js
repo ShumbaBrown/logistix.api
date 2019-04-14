@@ -48,7 +48,8 @@ module.exports.fetchOne = (req, res) => {
 module.exports.add = (req, res) => {
   var newGroup = new Group({
     groupId: crypto.randomBytes(4).toString('hex'),
-    users: []
+    users: req.query.users ? req.query.users : [],
+    bills: req.query.bills ? req.query.bills : [],
   })
 
   newGroup.save((err, group) => {
@@ -69,6 +70,7 @@ module.exports.add = (req, res) => {
 module.exports.update = (req, res) => {
   var queryData = {}
   if (req.query.users) queryData.users = req.query.users
+  if (req.query.bills) queryData.bills = req.query.bills
 
   Group.updateOne({groupId: req.params.id}, queryData, (err, group) => {
     if (err) {

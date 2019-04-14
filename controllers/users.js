@@ -48,12 +48,13 @@ module.exports.fetchOne = (req, res) => {
 module.exports.add = (req, res) => {
   var newUser = new User({
     userId: crypto.randomBytes(4).toString('hex'),
-    username: req.params.id
+    username: req.params.id,
+    firstName: req.query.firstName ? req.query.firstName : '',
+    lastName: req.query.lastName ? req.query.lastName : '',
+    password: req.query.password ? req.query.password : 'P4ssw0rd',
+    bills: req.query.bills ? req.query.bills : [],
+    groups: req.query.groups ? req.query.groups : [],
   })
-  // Fill in optionals
-  if (req.query.firstName) newUser.firstName = req.query.firstName
-  if (req.query.lastName) newUser.lastName = req.query.lastName
-
 
   newUser.save((err, user) => {
     if (err) {
@@ -72,7 +73,12 @@ module.exports.add = (req, res) => {
 
 module.exports.update = (req, res) => {
   var queryData = {}
-  if (req.query.users) queryData.users = req.query.users
+  if (req.query.firstName) queryData.firstName = req.query.firstName
+  if (req.query.lastName) queryData.lastName = req.query.lastName
+  if (req.query.username) queryData.username = req.query.username
+  if (req.query.password) queryData.password = req.query.password
+  if (req.query.bills) queryData.bills = req.query.bills
+  if (req.query.groups) queryData.groups = req.query.groups
 
   User.updateOne({userId: req.params.id}, queryData, (err, user) => {
     if (err) {

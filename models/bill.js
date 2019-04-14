@@ -3,7 +3,8 @@ var mongoose = require('mongoose')
 var billSchema = mongoose.Schema({
   billId: String,
   groupId: String,
-  users: Array
+  users: Array,
+  billName: String,
 })
 
 module.exports = mongoose.model('Bill', billSchema)
