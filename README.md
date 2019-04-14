@@ -24,8 +24,3 @@ POST /groups/:id | Updates a specified group | No | { users: Array (Optional) }
 DELETE /users/:id | Deletes a specified user | No | None
 DELETE /groups/:id | Deletes a specified group | No | None
 DELETE /bills/:id | Deletes a specified bill | No | None
-
-**To be added**
-- Add username to User controllers
-- Add groupName to Group model and controllers
-- Add billName to Bill model and controllers
