@@ -9,7 +9,7 @@ var mongoose = require('mongoose')
 var app = express()
 
 // Connect to DB
-mongoUrl = 'mongodb+srv://kode:<password>@logistix-0ws1z.gcp.mongodb.net/test?retryWrites=true'
+mongoUrl = 'mongodb+srv://kode:admin@logistix-0ws1z.gcp.mongodb.net/test?retryWrites=true'
 mongoose.connect(mongoUrl, { useNewUrlParser: true })
 var db = mongoose.connection
 db.on('error', console.error.bind(console, 'Connection error.'))
