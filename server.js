@@ -32,6 +32,7 @@ app.get('/', (req, res) => { return res.status(200).send('Logistix API')})
 app.use('/bills', billsRouter)
 app.use('/groups', groupsRouter)
 app.use('/users', usersRouter)
+app.use('/static', express.static('assets'))
 
 // Listen for connections
 app.listen(process.env.PORT, (req, res) => {
