@@ -9,7 +9,7 @@ var mongoose = require('mongoose')
 var app = express()
 
 // Connect to DB
-mongoUrl = 'mongodb://localhost:27017/logistix?retryWrites=true'
+mongoUrl = 'mongodb+srv://kode:admin@logistix-0ws1z.gcp.mongodb.net/test?retryWrites=true'
 mongoose.connect(mongoUrl, { useNewUrlParser: true })
 mongoose.set('useFindAndModify', false);
 var db = mongoose.connection
@@ -33,6 +33,7 @@ app.get('/', (req, res) => { return res.status(200).send('Logistix API')})
 app.use('/bills', billsRouter)
 app.use('/groups', groupsRouter)
 app.use('/users', usersRouter)
+app.use('/static', express.static('assets'))
 
 // Listen for connections
 app.listen(process.env.PORT, (req, res) => {
