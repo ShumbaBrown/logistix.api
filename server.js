@@ -9,7 +9,7 @@ var mongoose = require('mongoose')
 var app = express()
 
 // Connect to DB
-mongoUrl = 'mongodb+srv://kode:admin@logistix-0ws1z.gcp.mongodb.net/test?retryWrites=true'
+mongoUrl = 'mongodb://localhost:27017/test?retryWrites=true'
 mongoose.connect(mongoUrl, { useNewUrlParser: true })
 mongoose.set('useFindAndModify', false);
 var db = mongoose.connection
