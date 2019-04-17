@@ -4,7 +4,7 @@ var billSchema = mongoose.Schema({
   billId: String,
   groupId: String,
   users: Array,
-  billName: String,
+  name: String,
 })
 
 module.exports = mongoose.model('Bill', billSchema)

@@ -11,6 +11,7 @@ var app = express()
 // Connect to DB
 mongoUrl = 'mongodb://localhost:27017/logistix?retryWrites=true'
 mongoose.connect(mongoUrl, { useNewUrlParser: true })
+mongoose.set('useFindAndModify', false);
 var db = mongoose.connection
 db.on('error', console.error.bind(console, 'Connection error.'))
 db.once('open', () => console.log('Successfully connected to database.'))
