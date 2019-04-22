@@ -50,9 +50,9 @@ module.exports.add = (req, res) => {
   const newBillId = crypto.randomBytes(4).toString('hex')
   var newBill = new Bill({
     billId: newId,
-    groupId: req.query.groupId ? req.query.groupId : '',
-    users: req.query.users ? req.query.users : [],
-    name: req.query.name ? req.query.name : `Bill ${newBillId}`
+    groupId: req.body.groupId ? req.body.groupId : '',
+    users: req.body.users ? req.body.users : [],
+    name: req.body.name ? req.body.name : `Bill ${newBillId}`
   })
   newBill.save((err, bill) => {
     if (err || !bill) {
@@ -71,9 +71,9 @@ module.exports.add = (req, res) => {
 
 module.exports.update = (req, res) => {
   var queryData = {}
-  if (req.query.groupId) queryData.groupId = req.query.groupId
-  if (req.query.users) queryData.users = req.query.users
-  if (req.query.name) queryData.name = req.query.name
+  if (req.body.groupId) queryData.groupId = req.body.groupId
+  if (req.body.users) queryData.users = req.body.users
+  if (req.body.name) queryData.name = req.body.name
 
   Bill.findOneAndUpdate({billId: req.params.id}, queryData, {new: true}, (err, result) => {
     if (err || !result) {

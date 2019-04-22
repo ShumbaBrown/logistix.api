@@ -50,9 +50,9 @@ module.exports.add = (req, res) => {
   newGroupId = crypto.randomBytes(4).toString('hex')
   var newGroup = new Group({
     groupId: newGroupId,
-    users: req.query.users ? req.query.users : [],
-    bills: req.query.bills ? req.query.bills : [],
-    name: req.query.name ? req.query.name : `Group ${newGroupId}`
+    users: req.body.users ? req.body.users : [],
+    bills: req.body.bills ? req.body.bills : [],
+    name: req.body.name ? req.body.name : `Group ${newGroupId}`
   })
   newGroup.save((err, group) => {
     if (err || !group) {
@@ -71,9 +71,9 @@ module.exports.add = (req, res) => {
 
 module.exports.update = (req, res) => {
   var queryData = {}
-  if (req.query.users) queryData.users = req.query.users
-  if (req.query.bills) queryData.bills = req.query.bills
-  if (req.query.name) queryData.name = req.query.name
+  if (req.body.users) queryData.users = req.body.users
+  if (req.body.bills) queryData.bills = req.body.bills
+  if (req.body.name) queryData.name = req.body.name
 
   Group.findOneAndUpdate({groupId: req.params.id}, queryData, {new: true}, (err, result) => {
     if (err || !result) {
