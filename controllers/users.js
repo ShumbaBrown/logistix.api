@@ -25,7 +25,7 @@ module.exports.fetchAll = (req, res) => {
 }
 
 module.exports.fetchOne = (req, res) => {
-  User.findOne({ username: req.query.username }, (err, result) => {
+  User.findOne({ username: req.params.id }, (err, result) => {
     if (err || !result) {
       return res.status(500).json({
         success: false,
@@ -115,25 +115,23 @@ module.exports.remove = (req, res) => {
   })
 }
 
-// module.exports.login = (req, res) => {
-//   User.findOne({ username: req.body.username }, (err, result) => {
-//     if (err || !result) {
-//       return res.status(500).json({
-//         success: false,
-//         message: 'Error'
-//       })
-//     }
-//     if (result.length < 1) {
-//       return res.status(200).json({
-//         success: false,
-//         message: 'None'
-//       })
-//     }
-//     if (req.body.password == result)
-//     return res.status(200).json({
-//       success: true,
-//       message: 'User fetched successfully',
-//       data: result
-//     })
-//   })
-// }
+module.exports.auth = (req, res) => {
+  User.findOne({ username: req.body.username }, (err, result) => {
+    if (err || !result) {
+      return res.status(500).json({
+        success: false,
+        message: 'Error'
+      })
+    }
+    if (result.length < 1) {
+      return res.status(200).json({
+        success: false,
+        message: 'None'
+      })
+    }
+    return res.status(200).json({
+      success: result ? true : false,
+      message: 'User authorized'
+    })
+  })
+}
