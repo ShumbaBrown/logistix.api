@@ -25,7 +25,7 @@ module.exports.fetchAll = (req, res) => {
 }
 
 module.exports.fetchOne = (req, res) => {
-  User.findOne({ userId: req.params.id }, (err, result) => {
+  User.findOne({ username: req.body.username }, (err, result) => {
     if (err || !result) {
       return res.status(500).json({
         success: false,
