@@ -116,7 +116,7 @@ module.exports.remove = (req, res) => {
 }
 
 module.exports.auth = (req, res) => {
-  User.findOne({ username: req.body.username }, (err, result) => {
+  User.findOne({ username: req.body.username, password: req.body.password }, (err, result) => {
     if (err || !result) {
       return res.status(500).json({
         success: false,
@@ -131,8 +131,7 @@ module.exports.auth = (req, res) => {
     }
     return res.status(200).json({
       success: result ? true : false,
-      message: 'User authorized',
-      data: result.toString
+      message: 'User authorized'
     })
   })
 }
