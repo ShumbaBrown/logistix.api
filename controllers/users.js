@@ -131,7 +131,8 @@ module.exports.auth = (req, res) => {
     }
     return res.status(200).json({
       success: result ? true : false,
-      message: 'User authorized'
+      message: 'User authorized',
+      data: result.toString
     })
   })
 }
