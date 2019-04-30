@@ -51,14 +51,15 @@ module.exports.fetchOne = (req, res) => {
  */
 module.exports.fetchUserByName = (req, res) => {
   Group.findOne({ users: req.params.username }, (err, result) => {
-    if (err || !result) {
+    console.log(result)
+    if (err || !result) { 
       return res.status(500).json({
         success: false,
         message: 'Error!'
       })
     }
     if (result.length < 1) {
-      return res.status(200).json({
+      return res.status(500).json({
         success: false,
         message: 'None.'
       })
