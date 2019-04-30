@@ -4,6 +4,7 @@ var groupsController = require('../controllers/groups.js')
 
 router.get('/', groupsController.fetchAll)
 router.get('/:id', groupsController.fetchOne)
+router.get('/:username', groupsController.fetchUserByName)
 router.post('/', groupsController.add)
 router.post('/:id', groupsController.update)
 router.post('/:id/add', groupsController.addUser)

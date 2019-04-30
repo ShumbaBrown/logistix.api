@@ -46,6 +46,31 @@ module.exports.fetchOne = (req, res) => {
   })
 }
 
+/*
+ * Todo(shumba): add comments to each function.
+ */
+module.exports.fetchUserByName = (req, res) => {
+  Group.findOne({ users: req.params.username }, (err, result) => {
+    if (err || !result) {
+      return res.status(500).json({
+        success: false,
+        message: 'Error!'
+      })
+    }
+    if (result.length < 1) {
+      return res.status(200).json({
+        success: false,
+        message: 'None.'
+      })
+    }
+    return res.status(200).json({
+      success: true,
+      message: 'Fetched user successfully',
+      data: result
+    })
+  })
+}
+
 module.exports.add = (req, res) => {
   newGroupId = crypto.randomBytes(4).toString('hex')
   var newGroup = new Group({
