@@ -49,7 +49,7 @@ module.exports.fetchOne = (req, res) => {
 module.exports.add = (req, res) => {
   const newBillId = crypto.randomBytes(4).toString('hex')
   var newBill = new Bill({
-    billId: newId,
+    billId: newBillId,
     groupId: req.body.groupId ? req.body.groupId : '',
     users: req.body.users ? req.body.users : [],
     name: req.body.name ? req.body.name : `Bill ${newBillId}`
@@ -105,5 +105,31 @@ module.exports.remove = (req, res) => {
         message: 'Error'
       })
     }
+  })
+}
+
+/*
+ * Todo(shumba): add comments to each function.
+ */
+module.exports.fetchBillsByName = (req, res) => {
+  Bill.findOne({ users: req.params.username }, (err, result) => {
+    console.log(result);
+    if (err || !result) {
+      return res.status(500).json({
+        success: false,
+        message: 'Error!'
+      })
+    }
+    if (result.length < 1) {
+      return res.status(500).json({
+        success: false,
+        message: 'None.'
+      })
+    }
+    return res.status(200).json({
+      success: true,
+      message: 'Fetched user successfully',
+      data: result
+    })
   })
 }
