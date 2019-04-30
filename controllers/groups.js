@@ -90,6 +90,30 @@ module.exports.update = (req, res) => {
   })
 }
 
+module.exports.addUser = (req, res) => {
+  if (req.body.username && req.params.id) {
+    Group.findOneAndUpdate({groupId: req.params.id}, {$push: { users: req.body.username }},
+      {new: true}, (err, result) => {
+        if (err || !result) {
+          return res.status(500).json({
+            success: false,
+            message: 'Error'
+          })
+        }
+        return res.status(200).json({
+          success: true,
+          message: 'User added to group successfully',
+          group: result
+        })
+    })
+  } else {
+    return res.status(500).json({
+      success: false,
+      message: 'Error'
+    })
+  }
+}
+
 module.exports.remove = (req, res) => {
   Group.deleteOne({groupId: req.params.id}, (err, result) => {
     if (result.deletedCount) {
